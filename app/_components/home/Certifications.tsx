@@ -13,29 +13,54 @@ const ICON_PATHS: Record<string, string> = {
 
 export function Certifications() {
   return (
-    <section className="py-20 bg-white border-t border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white border-t border-b border-slate-100 relative overflow-hidden">
+      <div className="absolute inset-0 dot-pattern" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Trust & Compliance"
           title="Certifications & Standards"
           description="Our commitment to quality and safety is backed by internationally recognized certifications."
           centered
         />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-14">
           {CERTIFICATIONS.map((cert, i) => (
             <AnimateOnScroll key={cert.name} delay={i * 0.07}>
-              <div className="flex flex-col items-center text-center p-5 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-md hover:bg-slate-50 transition-all duration-200 group">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary transition-colors">
-                  <svg className="w-5 h-5 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={ICON_PATHS[cert.icon] ?? ICON_PATHS.award} />
-                  </svg>
+              <div className="group flex flex-col items-center text-center p-5 rounded-2xl border border-slate-100 hover:border-accent/40 bg-white transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/15"
+                style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
+              >
+                {/* Icon ring */}
+                <div className="relative mb-3">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/8 group-hover:bg-accent/15 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                    <svg className="w-6 h-6 text-primary group-hover:text-accent-dark transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={ICON_PATHS[cert.icon] ?? ICON_PATHS.award} />
+                    </svg>
+                  </div>
+                  {/* Verified dot */}
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-secondary flex items-center justify-center">
+                    <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
                 </div>
-                <div className="font-bold text-slate-900 text-sm">{cert.name}</div>
-                <div className="text-slate-400 text-[11px] mt-0.5 leading-tight">{cert.description}</div>
+
+                <div className="font-bold text-slate-900 text-sm leading-tight mb-0.5 group-hover:text-primary transition-colors">
+                  {cert.name}
+                </div>
+                <div className="text-slate-400 text-[11px] leading-tight">
+                  {cert.description}
+                </div>
               </div>
             </AnimateOnScroll>
           ))}
         </div>
+
+        {/* Bottom note */}
+        <AnimateOnScroll delay={0.4} className="mt-10 text-center">
+          <p className="text-slate-400 text-sm">
+            All certifications are regularly audited and renewed. Certificate of Analysis (CoA) provided with every shipment.
+          </p>
+        </AnimateOnScroll>
       </div>
     </section>
   )

@@ -1,8 +1,9 @@
 'use client'
 
 import { notFound } from 'next/navigation'
-import { use } from 'react'
+import { use, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { PRODUCTS } from '../../_lib/data'
 import { AnimateOnScroll } from '../../_components/ui/AnimateOnScroll'
@@ -19,6 +20,12 @@ const CATEGORY_COLORS: Record<string, string> = {
 export default function ProductDetailPage({ params }: PageProps<'/products/[slug]'>) {
   const { slug } = use(params)
   const product = PRODUCTS.find((p) => p.slug === slug)
+
+  const allPhotos = product
+    ? (product.photos && product.photos.length > 0 ? product.photos : product.photo ? [product.photo] : [])
+    : []
+  const [activePhoto, setActivePhoto] = useState(0)
+
   if (!product) notFound()
 
   const color = CATEGORY_COLORS[product.category] ?? '#0f2848'
@@ -45,22 +52,72 @@ export default function ProductDetailPage({ params }: PageProps<'/products/[slug
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Product Visual */}
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-              <div className="rounded-3xl overflow-hidden" style={{ backgroundColor: color }}>
-                <div className="relative p-16 flex items-center justify-center hex-pattern">
-                  <div className="absolute inset-0 hex-pattern" />
-                  <div className="relative text-center">
-                    <svg className="w-32 h-32 text-white/20 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                    </svg>
+              {allPhotos.length > 0 ? (
+                <div>
+                  {/* Main image */}
+                  <div className="relative rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-sm" style={{ height: 380 }}>
+                    <Image
+                      key={allPhotos[activePhoto]}
+                      src={allPhotos[activePhoto]}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      style={{ objectFit: 'contain', objectPosition: 'center' }}
+                      priority
+                    />
                     {product.casNumber && (
-                      <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl text-white">
-                        <div className="text-xs opacity-70 mb-0.5">CAS Number</div>
-                        <div className="font-mono font-bold">{product.casNumber}</div>
+                      <div className="absolute bottom-3 right-3">
+                        <span className="text-[10px] font-mono text-white/80 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                          CAS {product.casNumber}
+                        </span>
                       </div>
                     )}
                   </div>
+                  {/* Thumbnail strip — only shown when multiple photos */}
+                  {allPhotos.length > 1 && (
+                    <div className="flex gap-2 mt-3">
+                      {allPhotos.map((src, i) => (
+                        <button
+                          key={src}
+                          onClick={() => setActivePhoto(i)}
+                          className={`relative rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${
+                            i === activePhoto
+                              ? 'border-primary shadow-md shadow-primary/20'
+                              : 'border-slate-100 hover:border-slate-300'
+                          }`}
+                          style={{ width: 72, height: 72 }}
+                        >
+                          <Image
+                            src={src}
+                            alt={`${product.name} view ${i + 1}`}
+                            fill
+                            sizes="72px"
+                            style={{ objectFit: 'contain', objectPosition: 'center' }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
+              ) : (
+                /* Fallback placeholder for products without photos */
+                <div className="rounded-3xl overflow-hidden" style={{ backgroundColor: color }}>
+                  <div className="relative p-16 flex items-center justify-center">
+                    <div className="absolute inset-0 hex-pattern" />
+                    <div className="relative text-center">
+                      <svg className="w-32 h-32 text-white/20 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                      </svg>
+                      {product.casNumber && (
+                        <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl text-white">
+                          <div className="text-xs opacity-70 mb-0.5">CAS Number</div>
+                          <div className="font-mono font-bold">{product.casNumber}</div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
               {/* Quick actions below image */}
               <div className="flex gap-3 mt-4">
                 <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-50 rounded-xl text-sm text-slate-700 font-semibold hover:bg-slate-100 transition-colors">

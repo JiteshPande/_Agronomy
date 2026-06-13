@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Navbar } from './_components/Navbar'
 import { Footer } from './_components/Footer'
+import { ScrollToTop } from './_components/ui/ScrollToTop'
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-geist-sans',
   subsets: ['latin'],
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -43,11 +45,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${plusJakarta.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   )

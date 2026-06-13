@@ -1,3 +1,17 @@
+export type CropStage = 'soil-prep' | 'planting' | 'growing' | 'harvest' | 'year-round'
+
+export interface AppUseCase {
+  label: string
+  stage: CropStage
+  method: string
+  icon: string
+}
+
+export interface ProductFeature {
+  label: string   // e.g. "Phosphorus (P₂O₅)"
+  icon: string    // emoji shown in the hover arc node
+}
+
 export interface Product {
   slug: string
   name: string
@@ -5,8 +19,13 @@ export interface Product {
   shortDescription: string
   fullDescription: string
   image: string
+  photo?: string               // primary product photograph (card image)
+  photos?: string[]            // additional product images (detail-page gallery)
+  features?: ProductFeature[]  // up to 5 nodes shown in hover arc
+  featureLabel?: string        // headline text, e.g. "RICH IN ESSENTIAL NUTRIENTS"
   specifications: Record<string, string>
   applications: string[]
+  applicationGuide?: AppUseCase[]
   packaging: string[]
   safetyInfo: string
   relatedSlugs: string[]

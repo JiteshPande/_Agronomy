@@ -14,8 +14,9 @@ const ICONS: Record<string, string> = {
 
 export function IndustriesServed() {
   return (
-    <section className="py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="absolute inset-0 dot-pattern" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Industries"
           title="Serving Diverse Industries"
@@ -23,46 +24,80 @@ export function IndustriesServed() {
           centered
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
           {INDUSTRIES.map((industry, i) => (
-            <AnimateOnScroll key={industry.slug} delay={i * 0.08}>
+            <AnimateOnScroll key={industry.slug} delay={i * 0.07}>
               <Link
                 href={`/industries#${industry.slug}`}
-                className="group flex flex-col bg-white rounded-2xl p-6 border border-slate-100 hover:border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative"
+                className="group relative flex flex-col bg-white rounded-2xl p-6 border border-slate-100 overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                style={{
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)',
+                }}
               >
-                {/* Accent bar */}
+                {/* Hover background */}
                 <div
-                  className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+                  style={{ background: `linear-gradient(135deg, ${industry.color}06 0%, ${industry.color}02 100%)` }}
+                />
+
+                {/* Top accent bar */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl"
                   style={{ backgroundColor: industry.color }}
                 />
-                {/* Icon */}
+
+                {/* Hover glow */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
-                  style={{ backgroundColor: `${industry.color}15` }}
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ boxShadow: `0 8px 32px ${industry.color}18, 0 2px 8px ${industry.color}10` }}
+                />
+
+                {/* Large ghost icon background */}
+                <div
+                  className="absolute -right-4 -bottom-4 opacity-[0.04] group-hover:opacity-[0.07] transition-opacity duration-300 transform scale-150"
+                  style={{ color: industry.color }}
                 >
-                  <svg className="w-6 h-6" style={{ color: industry.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={ICONS[industry.icon] ?? ICONS.leaf} />
+                  <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                    <path d={ICONS[industry.icon] ?? ICONS.leaf} />
                   </svg>
                 </div>
-                <h3 className="font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">{industry.name}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">{industry.description}</p>
-                {/* Products */}
-                <div className="flex flex-wrap gap-1.5">
-                  {industry.products.map((product) => (
-                    <span
-                      key={product}
-                      className="text-[10px] px-2 py-0.5 rounded-full font-medium"
-                      style={{ backgroundColor: `${industry.color}10`, color: industry.color }}
-                    >
-                      {product}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center text-sm font-semibold transition-all" style={{ color: industry.color }}>
-                  Learn More
-                  <svg className="w-4 h-4 ml-1 group-hover:ml-2 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+
+                <div className="relative">
+                  {/* Icon */}
+                  <div
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{ backgroundColor: `${industry.color}12` }}
+                  >
+                    <svg className="w-6 h-6" style={{ color: industry.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={ICONS[industry.icon] ?? ICONS.leaf} />
+                    </svg>
+                  </div>
+
+                  <h3 className="font-bold text-slate-900 mb-2 text-base group-hover:text-primary transition-colors duration-200">
+                    {industry.name}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">{industry.description}</p>
+
+                  {/* Product tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {industry.products.map((product) => (
+                      <span
+                        key={product}
+                        className="text-[10px] px-2 py-0.5 rounded-full font-medium"
+                        style={{ backgroundColor: `${industry.color}10`, color: industry.color }}
+                      >
+                        {product}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div className="flex items-center text-xs font-bold transition-all duration-200" style={{ color: industry.color }}>
+                    Explore Solutions
+                    <svg className="w-3.5 h-3.5 ml-1.5 group-hover:ml-2.5 transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
                 </div>
               </Link>
             </AnimateOnScroll>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" fill="none">
+  <defs>
+    <linearGradient id="bg-gp" x1="0" y1="0" x2="480" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f1f0a"/>
+      <stop offset="100%" stop-color="#1a3510"/>
+    </linearGradient>
+    <radialGradient id="glow-gp" cx="50%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#25671E" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#25671E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="480" height="320" fill="url(#bg-gp)" rx="20"/>
+  <path d="M0 40h480M0 80h480M0 120h480M0 160h480M0 200h480M0 240h480M0 280h480M40 0v320M80 0v320M120 0v320M160 0v320M200 0v320M240 0v320M280 0v320M320 0v320M360 0v320M400 0v320M440 0v320" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <ellipse cx="240" cy="160" rx="120" ry="100" fill="url(#glow-gp)"/>
+  <!-- Hexagonal molecular structure - central -->
+  <polygon points="240,90 280,113 280,160 240,183 200,160 200,113" fill="rgba(37,103,30,0.15)" stroke="#25671E" stroke-width="2" stroke-opacity="0.7"/>
+  <!-- Inner hexagon -->
+  <polygon points="240,115 262,127 262,152 240,164 218,152 218,127" fill="rgba(72,161,17,0.1)" stroke="#48A111" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Center -->
+  <circle cx="240" cy="137" r="14" fill="rgba(72,161,17,0.2)" stroke="#48A111" stroke-width="2" stroke-opacity="0.7"/>
+  <circle cx="240" cy="137" r="6" fill="#48A111" opacity="0.6"/>
+  <!-- Outer node circles on hexagon vertices -->
+  <circle cx="240" cy="90" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <circle cx="280" cy="113" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <circle cx="280" cy="160" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <circle cx="240" cy="183" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <circle cx="200" cy="160" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <circle cx="200" cy="113" r="7" fill="#25671E" opacity="0.7" stroke="#48A111" stroke-width="1.2"/>
+  <!-- Extended connections -->
+  <line x1="240" y1="83" x2="240" y2="55" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="240" cy="50" r="6" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.5"/>
+  <line x1="286" y1="108" x2="312" y2="93" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="316" cy="91" r="5" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.45"/>
+  <line x1="287" y1="166" x2="314" y2="182" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="318" cy="184" r="5" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.45"/>
+  <line x1="240" y1="190" x2="240" y2="218" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="240" cy="222" r="6" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.5"/>
+  <line x1="193" y1="166" x2="166" y2="182" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="162" cy="184" r="5" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.45"/>
+  <line x1="194" y1="108" x2="168" y2="93" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="164" cy="91" r="5" fill="none" stroke="#48A111" stroke-width="1.2" stroke-opacity="0.45"/>
+  <!-- Outer ring molecules -->
+  <circle cx="75" cy="80" r="8" fill="none" stroke="#25671E" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="55" cy="60" r="5" fill="#25671E" opacity="0.25"/>
+  <circle cx="97" cy="58" r="4.5" fill="#25671E" opacity="0.2"/>
+  <circle cx="52" cy="100" r="4.5" fill="#48A111" opacity="0.2"/>
+  <line x1="75" y1="80" x2="55" y2="60" stroke="#25671E" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="75" y1="80" x2="97" y2="58" stroke="#25671E" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="75" y1="80" x2="52" y2="100" stroke="#48A111" stroke-width="1" stroke-opacity="0.28"/>
+  <circle cx="405" cy="85" r="7" fill="none" stroke="#25671E" stroke-width="1.5" stroke-opacity="0.48"/>
+  <circle cx="428" cy="65" r="5" fill="#25671E" opacity="0.22"/>
+  <circle cx="430" cy="108" r="4" fill="#48A111" opacity="0.18"/>
+  <line x1="405" y1="85" x2="428" y2="65" stroke="#25671E" stroke-width="1" stroke-opacity="0.28"/>
+  <line x1="405" y1="85" x2="430" y2="108" stroke="#48A111" stroke-width="1" stroke-opacity="0.26"/>
+  <!-- Accent dots -->
+  <circle cx="120" cy="250" r="4" fill="#F2B50B" opacity="0.5"/>
+  <circle cx="370" cy="240" r="3.5" fill="#F2B50B" opacity="0.48"/>
+  <circle cx="80" cy="200" r="3" fill="#F2B50B" opacity="0.42"/>
+  <circle cx="420" cy="210" r="3.5" fill="#F2B50B" opacity="0.45"/>
+  <!-- Label -->
+  <rect x="155" y="255" width="170" height="26" rx="8" fill="rgba(37,103,30,0.15)" stroke="#25671E" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="240" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6bce2a" font-weight="700" letter-spacing="0.5">NOVACHEM</text>
+  <text x="240" y="285" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#48A111" font-weight="500" letter-spacing="1">ISO 9001 CERTIFIED</text>
+</svg>
